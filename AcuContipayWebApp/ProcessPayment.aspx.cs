@@ -44,7 +44,28 @@ namespace AcuContipayWebApp
         {
             // Your event handler logic here, if any
         }
+        protected void btnPay_Click(object sender, EventArgs e)
+        {
+            // Add your payment processing logic here
+        }
 
+        protected void btnVerify_Click(object sender, EventArgs e)
+        {
+            // Add your verification logic here
+        }
+
+        protected void btnClear_Click(object sender, EventArgs e)
+        {
+            // Clear all form fields
+            //ddlSalesOrderType.SelectedIndex = 0;
+            //ddlContipayProvider.SelectedIndex = 0;
+            //txtSalesOrderDate.Text = "";
+            //txtAccountName.Text = "";
+            //txtTranDate.Text = "";
+            //txtCodeCVV.Text = "";
+            //ddlPaymentMethod.SelectedIndex = 0;
+            //txtExpiry.Text = "";
+        }
 
         public void refreshdata()
         {
