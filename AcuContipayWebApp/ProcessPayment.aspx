@@ -31,6 +31,7 @@
                                     <asp:BoundField DataField="orderNbr" HeaderText="SO#" />
                                     <asp:BoundField DataField="approved" HeaderText="Approved" />
                                     <asp:BoundField DataField="status" HeaderText="Status" />
+                                      <asp:BoundField DataField="contipayStatus" HeaderText="Contipay Status" />
                                     <asp:BoundField DataField="orderDate" HeaderText="Date" />
                                     <asp:BoundField DataField="CreatedByID_Creator_Username" HeaderText="Created By" />
                                     <asp:BoundField DataField="OrderQty" HeaderText="Order Qty" />
@@ -63,7 +64,7 @@
                 <div class="col-md-4 col-md-offset-1">
                     <div class="form-group">
                         <asp:Label Text="Sales Order Nbr.:" runat="server" />
-                        <asp:TextBox runat="server" Enabled="false" CssClass="form-control input-group-sm" />
+                        <asp:TextBox ID="txtOrderNbr" runat="server" Enabled="false" CssClass="form-control input-group-sm" />
                     </div>
                 </div>
 
@@ -86,7 +87,7 @@
                 <div class="col-md-4 col-md-offset-1">
                     <div class="form-group">
                         <asp:Label Text="Sales Order Date:" runat="server" />
-                        <asp:TextBox runat="server" Enabled="false" TextMode="Date" CssClass="form-control input-group-sm" />
+                        <asp:TextBox ID="txtOrderDate" runat="server" Enabled="false" TextMode="Date" CssClass="form-control input-group-sm" />
                     </div>
                 </div>
 
@@ -102,7 +103,7 @@
                 <div class="row">
                     <div class="col-md-4 col-md-offset-1">
                         <div class="form-group">
-                            <asp:Label Text="Tran Date:" runat="server" />
+                            <asp:Label Text="Transaction Date:" runat="server" />
                             <asp:TextBox runat="server" Enabled="true" TextMode="Date" CssClass="form-control input-group-sm" />
                         </div>
                     </div>
@@ -145,7 +146,7 @@
                     <div class="col-md-4 col-md-offset-1">
                         <div class="form-group">
                             <asp:Label Text="Sales Order Curr:" runat="server" />
-                            <asp:TextBox runat="server" Enabled="false" CssClass="form-control input-group-sm" />
+                            <asp:TextBox ID="txtCuryID" runat="server" Enabled="false" CssClass="form-control input-group-sm" />
                         </div>
                     </div>
 
@@ -162,7 +163,7 @@
                 <div class="col-md-4 col-md-offset-1">
                     <div class="form-group">
                         <asp:Label Text="Sales Order Amt Due:" runat="server" />
-                        <asp:TextBox runat="server" Enabled="false" CssClass="form-control input-group-sm" />
+                        <asp:TextBox ID="txtCuryOrderTotal" runat="server" Enabled="false" CssClass="form-control input-group-sm" />
                     </div>
                 </div>
 
@@ -185,28 +186,37 @@
 
                 <div class="col-md-4 col-md-offset-1">
                     <div class="form-group">
-                        <asp:Label Text="Status:" runat="server" />
-                        <asp:TextBox runat="server" Enabled="true" CssClass="form-control input-group-sm" />
+                        <asp:Label Text="Contipay Status:" runat="server" />
+                        <asp:TextBox ID="txtContiPayStatus" runat="server" Enabled="false" CssClass="form-control input-group-sm" />
                     </div>
                 </div>
 
-                 <div  class="col-md-4 col-md-offset-1">
-              <asp:Button ID="btnClear" runat="server" Text="Cancel" CssClass="btn btn-danger" OnClick="btnClear_Click" />
-              <asp:Button ID="btnVerify" runat="server" Text="Verify" CssClass="btn btn-success" OnClick="btnVerify_Click" />
-              <asp:Button ID="btnPay" runat="server" Text="     Pay    " CssClass="btn btn-primary" OnClick="btnPay_Click" />
-          </div>
+
 
             </div>
 
-              
+            <div class="row">
 
-
-
-            <div class="col-md-4 col-md-offset-1">
-                <div class="form-group">
-                    <label for="ddlContipayProvider">Contipay Provider:</label>
+                <div class="col-md-4 col-md-offset-1">
+                    <div class="form-group">
+                        <asp:Label Text="Unpaid Balance.:" runat="server" />
+                        <asp:TextBox ID="txtUpaidBalance" runat="server" Enabled="false" CssClass="form-control input-group-sm" />
+                    </div>
                 </div>
+
+                <div class="col-md-4 col-md-offset-1">
+                    <asp:Button ID="btnClear" runat="server" Text="Cancel" CssClass="btn btn-danger" OnClick="btnClear_Click" />
+                    <asp:Button ID="btnVerify" runat="server" Text="Verify" CssClass="btn btn-success" OnClick="btnVerify_Click" />
+                    <asp:Button ID="btnPay" runat="server" Text="     Pay    " CssClass="btn btn-primary" OnClick="btnPay_Click" />
+                </div>
+
+
             </div>
+
+
+
+
+  
         </section>
     </section>
 </asp:Content>
