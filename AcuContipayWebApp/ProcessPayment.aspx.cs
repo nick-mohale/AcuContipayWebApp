@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Configuration;
+
 
 namespace AcuContipayWebApp
 {
@@ -47,16 +49,11 @@ namespace AcuContipayWebApp
 
         protected void gvSelIdxChanged(object sender, EventArgs e)
         {
-            // Your event handler logic here, if any
             GridView gv = sender as GridView;
             if (gv != null && gv.SelectedIndex >= 0)
             {
                 // Assuming your data source is a DataTable or similar, and orderNbr is a column in it
                 DataTable dt = (DataTable)Session["dtOrderDetails"];
-
-            
-
-
 
                 string orderNbr = dt.Rows[gv.SelectedIndex]["orderNbr"].ToString();
                 DateTime orderDate;
@@ -69,20 +66,138 @@ namespace AcuContipayWebApp
                 if (dt != null)
                 {
                     txtOrderNbr.Text = orderNbr;
-                    string orderDateString = orderDate.ToString("yyyy-MM-dd"); // or any other desired date format
+                    string orderDateString = orderDate.ToString("yyyy-MM-dd");
                     txtOrderDate.Text = orderDateString;
                     txtCuryID.Text = CuryID;
                     txtCuryOrderTotal.Text = curyOrderTotal;
                     txtUpaidBalance.Text = curyUnpaidBalance;
                     txtContiPayStatus.Text = contiPayStatus;
                 }
+
+                Session["SessionSOContipay"] = dt;
+
             }
         }
         protected void btnPay_Click(object sender, EventArgs e)
         {
-            // Add your payment processing logic here
+            try
+            {
+                //    //Get ContiPay Setup
+                string WebMerchantId = ConfigurationManager.AppSettings["MerchantId"];
+                string baseURL = ConfigurationManager.AppSettings["BaseURL"];
+                string authenticationKey = ConfigurationManager.AppSettings["AuthenticationKey"];
+                string authenticationSecret = ConfigurationManager.AppSettings["AuthenticationSecret"];
+
+                #region variables
+                string actionUrl = "/acquire/payment";
+                int merchantId = int.Parse(WebMerchantId);
+                string endpointUrl = baseURL;
+                var authKey = authenticationKey;
+                string authSecret = authenticationSecret;
+
+
+                    bool tranExists = false;
+
+
+                //   var merchRef = GetExtRefNbr();
+
+                //GetTran(endpointUrl, actionUrl,
+                //                merchantId, merchantRef,
+                //                    authKey, authSecret);
+                //if (tranExists)
+                //{
+
+                //}
+                //else
+                //{
+                //rtow = screen elements
+
+
+                //CPProvider provider = GetProvider();
+                //Task<HttpResponseMessage> taskAquirePayment = Task.Run(async () => await
+                //                                                AcquirePayment(
+                //                                                    endpointUrl, actionUrl,
+                //                                                        merchantId, merchRef,
+                //        //                                                            authKey, authSecret).ConfigureAwait(false));
+                //    }
+
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
+        //public string GetExtRefNbr()
+        //{
+
+
+        //        string merchantRefNbr = string.Empty;
+        //    //    // SOContipay soContipay = new SOContipay(); // Your instance of SOContipay
+
+        //        DataTable dtContiPay = (DataTable)Session["SessionSOContipay"];
+
+        //        if (dtContiPay != null)
+        //        {
+        //        string orderType = dtContiPay.Rows[0]["orderNbr"].ToString();
+        //        string orderNbr = dtContiPay.Rows[0]["orderNbr"].ToString();
+
+        //                SOOrder order = new SOOrder
+        //                {
+        //                    OrderType = orderType,
+        //                    OrderNbr = orderNbr,
+
+        //                };
+
+        //                merchantRefNbr = order.CustomerRefNbr;
+
+
+        //        //        if (merchantRefNbr == null)
+        //        //        {
+        //        //            merchantRefNbr = order.OrderType + "-" + order.OrderNbr + "-" + "00";
+        //        //        }
+        //        //        else
+        //        //        {
+        //        //            string extRefNbr = merchantRefNbr.Split('-').Last();
+        //        //            if (extRefNbr == null)
+        //        //            {
+        //        //                merchantRefNbr = order.OrderType + "-" + order.OrderNbr + "-" + "00";
+        //        //            }
+        //        //            else
+        //        //            {
+        //        //                //Extract Suffix, convert to number, increment Suffix by 1
+        //        //                int intRefNbr = int.Parse(extRefNbr) + 1;
+        //        //                //connvert to string - change format to XX
+        //        //                merchantRefNbr = order.OrderType + "-" + order.OrderNbr + "-" + intRefNbr.ToString("##");
+        //        //            }
+        //        //        }
+
+        //        //        try
+        //        //        {
+        //        //            SOOrderEntry sOrdEntry = PXGraph.CreateInstance<SOOrderEntry>();
+
+        //        //            //var orderType = order.OrderType;
+        //        //            //var orderNbr = order.OrderNbr;
+
+        //        //            sOrdEntry.Document.Current = sOrdEntry.Document.Search<SOOrder.orderNbr>(orderNbr, orderType); ;
+        //        //            order.CustomerRefNbr = merchantRefNbr;
+        //        //            sOrdEntry.Document.Update(order);
+
+        //        //            sOrdEntry.Actions.PressSave();
+        //        //        }
+        //        //        catch (Exception ex)
+        //        //        {
+        //        //            int x = 0;
+        //        //        }
+
+        //    }
+
+
+
+        //    return merchantRefNbr;
+        //}
         protected void btnVerify_Click(object sender, EventArgs e)
         {
             // Add your verification logic here
